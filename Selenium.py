@@ -56,7 +56,7 @@ if not chrome.find_elements_by_css_selector('span#LabName'):
 
 if chrome.find_elements_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block'):
         if not chrome.find_elements_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block.disabled'):
-            chrome.find_element_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block').click()
+            chrome.find_element_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block').click()
             print('singIN')
         
         elif chrome.find_elements_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block'):
