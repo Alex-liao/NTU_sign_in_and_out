@@ -11,7 +11,9 @@ chrome_helper.check_browser_driver_available()
 
 options = Options()
 options.add_argument("--disable-notifications")
- 
+options.add_argument("--disable-software-rasterizer")
+
+
 chrome = webdriver.Chrome(r'C:\temp\chrome\chromedriver', chrome_options=options)
 chrome.get("https://my.ntu.edu.tw/attend/ssi.aspx?")
 
@@ -52,17 +54,26 @@ if not chrome.find_elements_by_css_selector('span#LabName'):
         password.submit()
         
 #   Selenium auto signin and out
-#   Signin first. If the signin button is blocked, then signout
+#   Signin first. Check if the signin is done. If not done yet, then signin and quit.
+#   If signin is done, then check signout status. If not done yet, then signout and quit.
 
-if chrome.find_elements_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block'):
+#signin_info
+signin_info = chrome.find_element_by_xpath("//*[@id='signs']")
+signin_time_text = minority.get_attribute("textContent")
+
+#signout_info
+signout_info = chrome.find_element_by_xpath("//*[@id='signe']")
+signout_time_text = minority.get_attribute("textContent")
+
+if signin_time_text == '':
         if not chrome.find_elements_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block.disabled'):
             chrome.find_element_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block').click()
             print('singIN')
-        
-        elif chrome.find_elements_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block'):
-            if not chrome.find_elements_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block.disabled'):
-                chrome.find_element_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block').click()
-                print('singOUT')
+
+elif signout_time_text =='':
+        if not chrome.find_elements_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block.disabled'):
+            chrome.find_element_by_css_selector('a#btSign2.btn.btn-lg.btn-success.btn-block').click()
+            print('singOUT')
 
 #   Close chrome
 
