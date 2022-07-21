@@ -59,11 +59,11 @@ if not chrome.find_elements_by_css_selector('span#LabName'):
 
 #signin_info
 signin_info = chrome.find_element_by_xpath("//*[@id='signs']")
-signin_time_text = minority.get_attribute("textContent")
+signin_time_text = signin_info.get_attribute("textContent")
 
 #signout_info
 signout_info = chrome.find_element_by_xpath("//*[@id='signe']")
-signout_time_text = minority.get_attribute("textContent")
+signout_time_text = signout_info.get_attribute("textContent")
 
 if signin_time_text == '':
         if not chrome.find_elements_by_css_selector('a#btSign.btn.btn-lg.btn-success.btn-block.disabled'):
